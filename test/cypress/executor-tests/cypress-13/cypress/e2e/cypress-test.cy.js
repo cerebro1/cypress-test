@@ -6,4 +6,3 @@ describe('HelloKube App', () => {
     cy.get('section p').should('contain.text', 'Welcome to the HelloKube App.');
   });
 });og(`Server running on http://localhost:${PORT}/`);
-});
