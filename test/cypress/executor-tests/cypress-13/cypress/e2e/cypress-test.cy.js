@@ -4,3 +4,27 @@ describe('HelloKube App', () => {
     cy.contains('Hello, Kubernetes!').should('be.visible');
   });
 });
+describe('Node.js HTTP Server', () => {
+  it('should display the header content when /header is visited', () => {
+    cy.request('http://192.168.103.2:30865/header');
+
+    cy.get('header h1').should('contain.text', 'HelloKube App'); // Adjust this to match the content in your header.html
+  });
+
+  it('should display the main content when /main is visited', () => {
+    cy.request('http://192.168.103.2:30865/main');
+
+    cy.get('section p').should('contain.text', 'Welcome to the HelloKube App.'); // Adjust this to match the content in your main.html
+  });
+
+  it('should display "Hello, Kubernetes!" for any other route', () => {
+    cy.request('http://192.168.103.2:30865/');
+
+    cy.contains('Hello, Kubernetes!').should('be.visible');
+
+    cy.request('http://192.168.103.2:30865/any-other-path');
+
+    cy.contains('Hello, Kubernetes!').should('be.visible');
+  });
+});
+
